@@ -4,7 +4,9 @@ return array(
 	'client_name1' => array(
 		//'google_api_key' => '******************************',
 		'Twilio_Account_SID' => '*****',
-		'Twilio_Auth_Token' => '********'
+		'Twilio_Auth_Token' => '********',
+		'Twilio_Number' => '********',
+		'Twilio_Message' => '********'
 		)/**,
 	'client_name2' => array(
 		//'google_api_key' => '******************************',
