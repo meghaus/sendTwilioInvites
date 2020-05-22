@@ -9,7 +9,7 @@
 *	@author: Mira Zeit
 *	@version: 2.0.1
 */
-class sendSMSInvites extends \LimeSurvey\PluginManager\PluginBase
+class sendTwilioInvites extends \LimeSurvey\PluginManager\PluginBase
 {
 	// Extension Info
 	protected $storage = 'DbStorage';
