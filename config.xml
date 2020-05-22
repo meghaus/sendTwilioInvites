@@ -6,8 +6,8 @@
         <creationDate>2016-09-19</creationDate>
         <last_update>2020-05-22</last_update>
         <author>Stefan Verweij - MZeit and Ricardo Andrade</author>
-        <authorUrl>https://github.com/stfandrade/SendSMSInvites</authorUrl>
-        <version>0.0.1</version>
+        <authorUrl>https://github.com/stfandrade/SendTwilioInvites</authorUrl>
+        <version>0.0.2</version>
         <license>MIT</license>
         <description><![CDATA[A customized version of SendSMSInvites to work with Twilio <ul>
             </ul>

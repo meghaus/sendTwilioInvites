@@ -14,7 +14,7 @@ class sendTwilioInvites extends \LimeSurvey\PluginManager\PluginBase
 	// Extension Info
 	protected $storage = 'DbStorage';
 	static protected $description = "Send SMS Functionality";
-	static protected $name = 'sendSMSInvites';
+	static protected $name = 'sendTwilioInvites';
 	
 	protected $settings =array(
 		'EnableSendSMS' => array(
@@ -110,7 +110,7 @@ class sendTwilioInvites extends \LimeSurvey\PluginManager\PluginBase
 					}else{}	// Confirmation don't want to send --> change this if you want to enter message and send confirmation SMS
 				}
 			}else{
-				echo("sendSMSInvites Plugin is enabled. If you do not wish to send SMS invitations, disable it. If you intend to use it, the SMS was not sent. Please add an extra attribute with the mobile number or NA for emails.");
+				echo("sendTwilioInvites Plugin is enabled. If you do not wish to send SMS invitations, disable it. If you intend to use it, the SMS was not sent. Please add an extra attribute with the mobile number or NA for emails.");
 				exit;
 			}
 		}else{} // The SendSMSPlugin is not enabled. Don't change anything!	
