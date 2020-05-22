@@ -71,8 +71,9 @@ class sendSMSInvites extends \LimeSurvey\PluginManager\PluginBase
 			// Then we need to check if the admin added an extra attribute
 			if(isset($ourTokenData['attribute_1'])){
 				// 3. This invite should be send via SMS and not to the Email account
-				$mobile = (string)$ourTokenData['attribute_1'];
-				if(strcmp($mobile,'NA')!=0 and !empty($mobile)){
+				$mobile = (string)$ourTokenData['token'];
+				$client = (string)$ourTokenData['attribute_1'];
+				if(strcmp($client,'NA')!=0 and !empty($client)){
 					// disable sending email for this token and send SMS
 					$this->event->set("send",false);
 
@@ -82,24 +83,6 @@ class sendSMSInvites extends \LimeSurvey\PluginManager\PluginBase
 					$participantFirstName = (string)$ourTokenData['firstname'];
 					$participantLastName = (string)$ourTokenData['lastname'];
 					$surveyLink = 'http://'. $_SERVER['SERVER_NAME'] . '/index.php/survey/index/sid/' . $surveyId . '/token/' . $participantToken;		
-
-					/* This part will no longer be used - (Optional)
-					$api_url = "https://www.googleapis.com/urlshortener/v1/url?key=". $plugin_configs['google_api_key']; 
-					$shorten_parameters = array("longUrl" => $surveyLink);
-					$content_type = "Content-Type:application/json";
-					$jsonrequest = json_encode($shorten_parameters);
-					$short_URL="";			
-
-					$response = $this->httpPost($api_url,$jsonrequest,$content_type);				
-					$decoded_response = json_decode($response);
-
-					if (json_last_error() == JSON_ERROR_NONE){
-						$short_URL=$decoded_response->{'id'};
-					}
-					if(!$response){
-					   print "Failed to connect to Google URL Shortener API.";
-					   $short_URL=$surveyLink;
-					}*/
 
 					// Setting up the default SMS message in case the admin left it empty.
 					if(empty($SMS_message)){
@@ -114,8 +97,12 @@ class sendSMSInvites extends \LimeSurvey\PluginManager\PluginBase
 					// Since I don't want to send confirmation SMS, only for reminder and confirmation
 					if((strcmp($typeOfEmail,'invitation')==0) or (strcmp($typeOfEmail,'reminder')==0)){
 						// setting up the connection with SMS Service Provider then sending SMS msg
-						$query_parameters=http_build_query(array("username" => $plugin_configs['SMS_Provider_Username'], "password" => $plugin_configs['SMS_Provider_Passowrd'], "to" => $mobile, "text"=>$SMS_message_ready_to_be_sent));
-						$result_of_post = $this->httpPost($plugin_configs['SMS_service_url'],$query_parameters);
+						$twilio_sid => $plugin_configs[$client].['Twilio_Account_SID'];
+						$twilio_token => $plugin_configs[$client].['Twilio_Auth_Token'];
+						$twilio_from => $plugin_configs[$client].['Twilio_Number'];
+						$mobile;
+						$SMS_message_ready_to_be_sent;
+						$result_of_post = $this->callTwilio($twilio_sid,$twilio_token,$twilio_from,$mobile,$SMS_message_ready_to_be_sent);
 						if($result_of_post === FALSE){
 							echo("SMS not sent. Please contact the administrator at survey_admin@xyz.com");
 							exit;
@@ -135,30 +122,27 @@ class sendSMSInvites extends \LimeSurvey\PluginManager\PluginBase
 	*  The third argument (request_header) is optional
 	*  returns the response from the external page/API
 	*/
-	private function httpPost($request_url,$request_params,$request_header=null)
-	{	
-		$curlHandle    = curl_init();	
-		$proxy = 'PROXY_URL:PORT_NUMBER';	// These settings needs to be changed !!
-		$proxyauth = 'USERNAME:PASSWORD';	// If there is no proxy delete these lines
-		
-		curl_setopt($curlHandle, CURLOPT_URL, $request_url);
-		curl_setopt($curlHandle, CURLOPT_POST, true);
-		curl_setopt($curlHandle, CURLOPT_HEADER, false);
-		curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request_params);
-		curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-		
-		if(!is_null($request_header))
-		{
-			curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
-			curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array($request_header));
-		}
-		
-		curl_setopt($curlHandle, CURLOPT_PROXY, $proxy);
-		curl_setopt($curlHandle, CURLOPT_PROXYUSERPWD, $proxyauth);
+	private function callTwilio($sid,$token,$from,$to,$body)
+	{
+        // Require the bundled autoload file - the path may need to change
+        // based on where you downloaded and unzipped the SDK
+        require __DIR__ . '/twilio-php-master/src/Twilio/autoload.php';
 
-		$response = curl_exec($curlHandle);
-		curl_close($curlHandle);
-		
+        // Use the REST API Client to make requests to the Twilio REST API
+        use Twilio\Rest\Client;
+        $client = new Client($sid, $token);
+
+        // Use the client to do fun stuff like send text messages!
+        $response = $client->messages->create(
+            // the number you'd like to send the message to
+            'whatsapp:+'.$to,
+            [
+                // A Twilio phone number you purchased at twilio.com/console
+                'from' => 'whatsapp:+'$from,
+                // the body of the text message you'd like to send
+                'body' => $body
+            ]
+        );		
 		return $response;
 	}
 	
