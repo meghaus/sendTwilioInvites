@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <metadata>
+        <name>sendSMSInvites</name>
+        <type>plugin</type>
+        <creationDate>2016-09-19</creationDate>
+        <last_update>2020-05-22</last_update>
+        <author>Stefan Verweij - MZeit and Ricardo Andrade</author>
+        <authorUrl>https://github.com/stfandrade/SendSMSInvites</authorUrl>
+        <version>0.0.1</version>
+        <license>MIT</license>
+        <description><![CDATA[A customized version of SendSMSInvites to work with Twilio <ul>
+            </ul>
+]]></description>
+    </metadata>
+
+    <compatibility>
+        <version>4</version>
+    </compatibility>
+
+    <updaters disabled="disabled">
+    </updaters>
+</config>
