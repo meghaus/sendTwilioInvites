@@ -1,4 +1,5 @@
 # SendSMSInvites
+
 A Limesurvey Plugin that adds the option to send survey invitations via SMS as well as emails.
 
 ## The Purpose
@@ -19,25 +20,27 @@ Note: The mobile number needs to be in the 1st extra attribute for the plugin to
 
 ### Prerequisites
 
-* Limesurvey Version 3.15
-* An account at an SMS Gateway which provides a HTTP/HTTPS interface to interact with the plugin via HTTP post requests. 
+- Limesurvey Version 4.3
+- An account at a Twilio SMS Gateway which provides a HTTP/HTTPS interface to interact with the plugin via HTTP post requests.
 
 ### SMS Gateway set Up
+
 The SMS Gateway account credentials should be saved in the pluginConfig.php file, depending on the gateway of your choice, the authentication method for your account can be a username & password, OAuth key or an API key. Some changes in line 116 might be needed accordingly. Read the documentation of the Gateway HTTP request to ensure compatibility.
 
 ### Installation
 
 In order to install this plugin:
-1.	Download the php file and save it locally
-2.  Purchase credit from a SMS Gateway and edit the pluginConfig.php file with the credentials.
-3.	Create a folder in the directory plugins located at your Limesurvey server, the folder created has to have the same name as the plugin.
-4.	Place the php file in the folder created.
-5.	After refreshing the admin page, activate the plugin from Configuration -> Plugin Manager Panel.
-6. Optional Step, if you wish to shorten the survey URL in the SMS, uncomment the lines 86 - 102. Then, create an account at a service that shortens URLs (like Bitly, ...) and change the code accordingly to set it up. 
+
+1. Download the master file and extract to your local development environment.
+2. Create a Twilio account. Refer [Twilio Documentation](https://www.twilio.com/docs/sms/quickstart/php) for further instructions. You will need your Twilio account SID, Auth Token and the Twilio number to proceed.
+3. Replace the above details from your account in the SmsInvitesTwilio.php file.
+4. Create a folder in the directory plugins located at your Limesurvey server, the folder created has to have the same name as the plugin (eg. SmsInvitesTwilio here).
+5. Upload the files to the folder created.
+6. After refreshing the admin page, activate the plugin from Configuration -> Plugin Manager Panel.
 
 ### Plugin Settings
 
-This plugin includes two settings; EnableSendSMS and MessageBody. These settings can be set globally from the Plugin Manager -> (sendSMSInvites) -> Configure. The EnableSendSMS is set by default to No, this can be overridden on the survey level from the survey settings. The MessageBody setting gives the survey admin the space to write the SMS that will be sent to the recipients. 
+This plugin includes two settings; EnableSendSMS and MessageBody. These settings can be set globally from the Plugin Manager -> (sendSMSInvites) -> Configure. The EnableSendSMS is set by default to No, this can be overridden on the survey level from the survey settings. The MessageBody setting gives the survey admin the space to write the SMS that will be sent to the recipients.
 
 ## License
 
@@ -45,4 +48,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Stefan Verweij – [Creating Limesurvey Plugins](https://medium.com/@evently/creating-limesurvey-plugins-adcdf8d7e334)
+- Stefan Verweij – [Creating Limesurvey Plugins](https://medium.com/@evently/creating-limesurvey-plugins-adcdf8d7e334)

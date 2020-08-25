@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <metadata>
-        <name>sendTwilioInvites</name>
+        <name>twilioSMSInvites</name>
         <type>plugin</type>
-        <creationDate>2016-09-19</creationDate>
-        <last_update>2020-05-22</last_update>
-        <author>Stefan Verweij - MZeit and Ricardo Andrade</author>
-        <authorUrl>https://github.com/stfandrade/SendTwilioInvites</authorUrl>
-        <version>0.0.2</version>
-        <license>MIT</license>
-        <description><![CDATA[A customized version of SendSMSInvites to work with Twilio <ul>
-            </ul>
-]]></description>
+        <creationDate>2020-08-14</creationDate>
+        <last_update>2020-08-16</last_update>
+        <author>Megha Ganewatta  - MZeit,Ricardo Andrade and Stefan Verweij</author>
+        <authorUrl>https://www.megha.dev</authorUrl>
+        <authorEmail>contact@megha.dev</authorEmail>
+        <version>1.1</version>
+        <license>GNU General Public License version 2 or later</license>
+        <description><![CDATA[A plugin for sending SMS invitations using Twilio.]]></description>
     </metadata>
 
     <compatibility>
-        <version>4</version>
+        <version>4.3</version>
     </compatibility>
 
     <updaters disabled="disabled">
