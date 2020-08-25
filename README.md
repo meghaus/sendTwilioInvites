@@ -1,6 +1,6 @@
 # SendSMSInvites
 
-A Limesurvey Plugin that adds the option to send survey invitations via SMS as well as emails.
+A Limesurvey Plugin that adds the option to send survey invitations via SMS using [Twilio](https://www.twilio.com/).
 
 ## The Purpose
 
