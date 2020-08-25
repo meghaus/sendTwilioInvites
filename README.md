@@ -21,11 +21,7 @@ Note: The mobile number needs to be in the 1st extra attribute for the plugin to
 ### Prerequisites
 
 - Limesurvey Version 4.3
-- An account at a Twilio SMS Gateway which provides a HTTP/HTTPS interface to interact with the plugin via HTTP post requests.
-
-### SMS Gateway set Up
-
-The SMS Gateway account credentials should be saved in the pluginConfig.php file, depending on the gateway of your choice, the authentication method for your account can be a username & password, OAuth key or an API key. Some changes in line 116 might be needed accordingly. Read the documentation of the Gateway HTTP request to ensure compatibility.
+- An account at a Twilio SMS Gateway which provides a HTTP/HTTPS interface to interact with the plugin.
 
 ### Installation
 
